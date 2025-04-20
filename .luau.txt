@@ -1,0 +1,47 @@
+--// This is just minified. You'll have no problem unminifying it, right? --\\
+
+local _G1 = Instance.new("ScreenGui", Game.CoreGui)
+
+local _B2 = Instance.new("ImageButton", _G1)
+_B2.Image = "rbxassetid://12875154302"
+_B2.Size = UDim2.new(0, 50, 0, 50)
+_B2.Position = UDim2.new(0, 0, 0.5, 0)
+_B2.BackgroundTransparency = 1
+_B2.BorderSizePixel = 0
+
+local _U3 = Instance.new("UICorner", _B2)
+_U3.CornerRadius = UDim.new(0, 5)
+
+local _P4, _R5, _T6 = Game.Players.LocalPlayer, Game:GetService("RunService"), false
+
+local function _M7()
+	local _C8 = _P4.Character and _P4.Character:FindFirstChild("HumanoidRootPart")
+	if not _C8 then return end
+	_R5.RenderStepped:Connect(function()
+		if _T6 then
+			local _L9 = Workspace.CurrentCamera.CFrame.LookVector
+			_C8.CFrame = CFrame.new(_C8.Position, _C8.Position + Vector3.new(_L9.X, 0, _L9.Z))
+		end
+	end)
+end
+
+_B2.MouseButton1Click:Connect(function() _T6 = not _T6 _M7() end)
+_P4.CharacterAdded:Connect(_M7)
+
+local _D10, _DI11, _DS12, _SP13 = false
+local function _UD14(_I15)
+	local _DL16 = _I15.Position - _DS12
+	_B2.Position = UDim2.new(_SP13.X.Scale, _SP13.X.Offset + _DL16.X, _SP13.Y.Scale, _SP13.Y.Offset + _DL16.Y)
+end
+_B2.InputBegan:Connect(function(_I15)
+	if _I15.UserInputType == Enum.UserInputType.MouseButton1 or _I15.UserInputType == Enum.UserInputType.Touch then
+		_D10, _DS12, _SP13 = true, _I15.Position, _B2.Position
+		_I15.Changed:Connect(function() if _I15.UserInputState == Enum.UserInputState.End then _D10 = false end end)
+	end
+end)
+_B2.InputChanged:Connect(function(_I15)
+	if _I15.UserInputType == Enum.UserInputType.MouseMovement or _I15.UserInputType == Enum.UserInputType.Touch then _DI11 = _I15 end
+end)
+Game:GetService("UserInputService").InputChanged:Connect(function(_I15)
+	if _D10 and _I15 == _DI11 then _UD14(_I15) end
+end)
