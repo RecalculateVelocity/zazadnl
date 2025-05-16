@@ -1,8 +1,11 @@
---[[ This config is for close rev ]]--
+--[[ This config is not recommended ]]--
 
 getgenv()['Rasma.lol'] = {
     ['Start UP'] = {
         Intro = 'Yes';
+        Optimize = 'Yes';
+        ['Unlock FPS'] = 'Yes';
+        ['FPS Cap'] = '75';
     };
     ['Camlock Configuration'] = {
         ['NPC Name'] = 'Dummy';
@@ -35,8 +38,15 @@ getgenv()['Rasma.lol'] = {
     };
     ['Hitbox Expander'] = {
         Enabled = 'Yes';
-        Size = 2;
+        Size = 4;
         Interval = 0;
+    };
+    ['Auto Settings'] = {
+        ['Mute Everything'] = 'No';
+        ['Mute Gun Shot Sounds'] = 'Yes';
+        ['No Fog'] = 'No';
+        ['Low GFX'] = 'Yes';
+        ['Mute Footsteps'] = 'Yes'; 
     };
     ['Hit Effects'] = {
         Enabled = 'Yes';
